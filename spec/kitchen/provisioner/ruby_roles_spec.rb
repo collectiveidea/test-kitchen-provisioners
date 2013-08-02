@@ -2,11 +2,6 @@ require 'spec_helper'
 require 'kitchen/provisioner/ruby_roles'
 
 describe Kitchen::Provisioner::RubyRoles do
-  class BogusInstance
-    def logger
-    end
-  end
-
   before do
     # Sorry, can't use FakeFS because chef completely bypasses the
     # entire File api when reading the file.

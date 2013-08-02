@@ -1,10 +1,10 @@
 require 'spec_helper'
-require 'kitchen/provisioner/apt_ruby_roles_chef_zero'
+require 'kitchen/provisioner/chef_apt_ruby_roles_chef_zero'
 
-describe Kitchen::Provisioner::AptRubyRolesChefZero do
+describe Kitchen::Provisioner::ChefAptRubyRolesChefZero do
 
   before do
-    @provisioner = Kitchen::Provisioner::AptRubyRolesChefZero.new(BogusInstance.new, nil)
+    @provisioner = Kitchen::Provisioner::ChefAptRubyRolesChefZero.new(BogusInstance.new, nil)
     @apt        = @provisioner.instance_variable_get("@apt")
     @ruby_roles = @provisioner.instance_variable_get("@ruby_roles")
     @chef_zero  = @provisioner.instance_variable_get("@chef_zero")

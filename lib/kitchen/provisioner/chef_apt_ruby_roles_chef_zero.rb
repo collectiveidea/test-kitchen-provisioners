@@ -7,7 +7,8 @@ module Kitchen
 
     # This Provisioner combines the roles of the Apt, Ruby Roles, and ChefZero
     # provisioners, to ensure a server is ready to run before ChefZero starts its magic
-    class AptRubyRolesChefZero < Base
+    # Must be named "Chef..." otherwise TestKitchen won't understand that we intend to use chef
+    class ChefAptRubyRolesChefZero < Base
       def initialize(instance, options)
         super
         @apt = Apt.new(instance, options)

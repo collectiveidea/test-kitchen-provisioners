@@ -10,12 +10,10 @@ module Kitchen
     # each Ruby-written role and generate the JSON version.
     # This then allows the ChefZero tool to pick up these roles, as it only knows about JSON
     class RubyRoles < Base
-      def initialize(instance, options, roles_path)
-        super(instance, options)
-        @roles_path = roles_path
-      end
 
-      def run_command
+      attr_accessor :roles_path
+
+      def create_sandbox
         # From https://gist.github.com/red56/834890
         Dir.glob(File.join(@roles_path, "*.rb")).each do |ruby_role_file_name|
           role = Chef::Role.new
@@ -27,6 +25,8 @@ module Kitchen
           end
         end
       end
+
     end
+
   end
 end

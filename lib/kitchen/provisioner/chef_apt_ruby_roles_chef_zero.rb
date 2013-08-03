@@ -13,7 +13,7 @@ module Kitchen
         super
         @apt = Apt.new(instance, options)
         @chef_zero = ChefZero.new(instance, options)
-        @ruby_roles = RubyRoles.new(instance, options, File.join(@chef_zero.home_path, "roles"))
+        @ruby_roles = RubyRoles.new(instance, options)
       end
 
       def install_command
@@ -24,17 +24,22 @@ module Kitchen
         @chef_zero.init_command
       end
 
+      # Let chef-zero create the sandbox then convert the Ruby-based role files
+      # into JSON before uploads happen (which happen right after this returns)
       def create_sandbox
-        @chef_zero.create_sandbox
+        sandbox_path = @chef_zero.create_sandbox
+        @ruby_roles.roles_path = File.join(sandbox_path, "roles")
+        @ruby_roles.create_sandbox
+        sandbox_path
       end
 
       def prepare_command
         @chef_zero.prepare_command
       end
 
+      # Run the apt provisioner before starting up chef-zero
       def run_command
         @apt.run_command
-        @ruby_roles.run_command
         @chef_zero.run_command
       end
 

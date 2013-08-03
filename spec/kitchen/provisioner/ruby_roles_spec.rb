@@ -35,8 +35,9 @@ EOC
       role.puts "This is role thingy 3"
     end
 
-    provisioner = Kitchen::Provisioner::RubyRoles.new(BogusInstance.new, nil, "tmp/roles")
-    provisioner.run_command
+    provisioner = Kitchen::Provisioner::RubyRoles.new(BogusInstance.new, nil)
+    provisioner.roles_path = "tmp/roles"
+    provisioner.create_sandbox
 
     expect(File.exists?("tmp/roles/role1.json")).to be_true
     expect(File.exists?("tmp/roles/role2.json")).to be_true

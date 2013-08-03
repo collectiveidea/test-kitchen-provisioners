@@ -26,9 +26,10 @@ describe Kitchen::Provisioner::ChefAptRubyRolesChefZero do
     @provisioner.init_command
   end
 
-  it "creates sandbox for chef zero" do
-    expect(@chef_zero).to receive(:create_sandbox)
-    expect(@ruby_roles).not_to receive(:create_sandbox)
+  it "creates sandbox for chef zero and converts ruby roles" do
+    expect(@chef_zero).to receive(:create_sandbox).and_return("path").ordered
+    expect(@ruby_roles).to receive(:roles_path=).with("path/roles").ordered
+    expect(@ruby_roles).to receive(:create_sandbox).ordered
     expect(@apt).not_to receive(:create_sandbox)
 
     @provisioner.create_sandbox
@@ -44,8 +45,8 @@ describe Kitchen::Provisioner::ChefAptRubyRolesChefZero do
 
   it "runs apt, ruby roles, then chef-zero, in that order" do
     expect(@apt).to receive(:run_command).ordered
-    expect(@ruby_roles).to receive(:run_command).ordered
     expect(@chef_zero).to receive(:run_command).ordered
+    expect(@ruby_roles).not_to receive(:run_command)
 
     @provisioner.run_command
   end

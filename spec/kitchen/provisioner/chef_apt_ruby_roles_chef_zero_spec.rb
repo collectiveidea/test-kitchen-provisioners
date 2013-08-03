@@ -44,11 +44,11 @@ describe Kitchen::Provisioner::ChefAptRubyRolesChefZero do
   end
 
   it "runs apt, ruby roles, then chef-zero, in that order" do
-    expect(@apt).to receive(:run_command).ordered
-    expect(@chef_zero).to receive(:run_command).ordered
+    expect(@apt).to receive(:run_command).and_return("apt me").ordered
+    expect(@chef_zero).to receive(:run_command).and_return("chef me").ordered
     expect(@ruby_roles).not_to receive(:run_command)
 
-    @provisioner.run_command
+    expect(@provisioner.run_command).to eq("apt me && chef me")
   end
 
   it "cleans up the chef zero sandbox" do

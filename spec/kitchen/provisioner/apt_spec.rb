@@ -4,7 +4,7 @@ require 'kitchen/provisioner/apt'
 describe Kitchen::Provisioner::Apt do
   it "runs aptitude update" do
     provisioner = Kitchen::Provisioner::Apt.new(BogusInstance.new, nil)
-    expect(provisioner).to receive(:sudo).with("aptitude update")
-    provisioner.run_command
+    expect(provisioner).to receive(:sudo).with("aptitude").and_return("aptitude")
+    expect(provisioner.run_command).to eq("aptitude update")
   end
 end

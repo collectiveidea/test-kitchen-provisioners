@@ -9,7 +9,7 @@ module Kitchen
     # chef run before cookbooks are pulled in.
     class Apt < Base
       def run_command
-        sudo("aptitude update")
+        "#{sudo("aptitude")} update"
       end
     end
   end

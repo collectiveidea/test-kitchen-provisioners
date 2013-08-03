@@ -39,8 +39,10 @@ module Kitchen
 
       # Run the apt provisioner before starting up chef-zero
       def run_command
-        @apt.run_command
-        @chef_zero.run_command
+        [
+          @apt.run_command,
+          @chef_zero.run_command
+        ].join(" && ")
       end
 
       def cleanup_sandbox

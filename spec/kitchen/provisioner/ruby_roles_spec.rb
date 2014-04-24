@@ -35,7 +35,8 @@ EOC
       role.puts "This is role thingy 3"
     end
 
-    provisioner = Kitchen::Provisioner::RubyRoles.new(BogusInstance.new, nil)
+    provisioner = Kitchen::Provisioner::RubyRoles.new
+    provisioner.instance = BogusInstance.new
     provisioner.roles_path = "tmp/roles"
     provisioner.create_sandbox
 

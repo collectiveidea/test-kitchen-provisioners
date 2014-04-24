@@ -16,7 +16,7 @@ module Kitchen
       def create_sandbox
         # From https://gist.github.com/red56/834890
         Dir.glob(File.join(@roles_path, "*.rb")).each do |ruby_role_file_name|
-          role = Chef::Role.new
+          role = ::Chef::Role.new
           role.from_file(ruby_role_file_name)
           json_file_name = ruby_role_file_name.gsub(/rb$/, "json")
 

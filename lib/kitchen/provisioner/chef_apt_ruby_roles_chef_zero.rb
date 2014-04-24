@@ -9,11 +9,11 @@ module Kitchen
     # provisioners, to ensure a server is ready to run before ChefZero starts its magic
     # Must be named "Chef..." otherwise TestKitchen won't understand that we intend to use chef
     class ChefAptRubyRolesChefZero < Base
-      def initialize(instance, options)
+      def initialize(options = {})
         super
-        @apt = Apt.new(instance, options)
-        @chef_zero = ChefZero.new(instance, options)
-        @ruby_roles = RubyRoles.new(instance, options)
+        @apt = Apt.new(options)
+        @chef_zero = ChefZero.new(options)
+        @ruby_roles = RubyRoles.new(options)
       end
 
       def install_command

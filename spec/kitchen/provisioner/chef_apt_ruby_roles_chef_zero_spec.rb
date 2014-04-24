@@ -4,7 +4,9 @@ require 'kitchen/provisioner/chef_apt_ruby_roles_chef_zero'
 describe Kitchen::Provisioner::ChefAptRubyRolesChefZero do
 
   before do
-    @provisioner = Kitchen::Provisioner::ChefAptRubyRolesChefZero.new(BogusInstance.new, nil)
+    @provisioner          = Kitchen::Provisioner::ChefAptRubyRolesChefZero.new
+    @provisioner.instance = BogusInstance.new
+
     @apt        = @provisioner.instance_variable_get("@apt")
     @ruby_roles = @provisioner.instance_variable_get("@ruby_roles")
     @chef_zero  = @provisioner.instance_variable_get("@chef_zero")

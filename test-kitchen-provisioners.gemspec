@@ -14,5 +14,5 @@ Gem::Specification.new do |gem|
   gem.require_paths = ["lib"]
 
   gem.add_dependency "chef",         "~> 11.6.0"
-  gem.add_dependency "test-kitchen", "1.0.0.beta.2"
+  gem.add_dependency "test-kitchen", "~> 1.2.0"
 end
